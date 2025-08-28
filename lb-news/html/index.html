@@ -13,11 +13,6 @@
 		</header>
 		<main class="content">
 			<section class="toolbar">
-				<div class="left">
-					<select id="categoryFilter" class="select">
-						<option value="">Alle Kategorien</option>
-					</select>
-				</div>
 				<div class="right">
 					<button id="newPostBtn" class="btn primary">Neuer Beitrag</button>
 					<button id="closeBtn" class="btn">Schließen</button>
@@ -58,6 +53,13 @@
 			</section>
 
 			<section id="posts" class="list"></section>
+
+			<footer class="category-footer">
+				<label for="categoryFilter" class="sr-only">Kategorie filtern</label>
+				<select id="categoryFilter" class="select tiny">
+					<option value="">Alle Kategorien</option>
+				</select>
+			</footer>
 		</main>
 	</div>
 	<script src="app.js"></script>

@@ -34,7 +34,9 @@ textarea { min-height: 72px; resize: vertical; }
 .actions { display: flex; gap: 8px; justify-content: flex-end; }
 
 .list { display: flex; flex-direction: column; gap: 10px; }
-.post { background: var(--bg-elev); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.post { background: var(--bg-elev); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; position: relative; }
+.post + .post { border-top: 0; }
+.post + .post::before { content: ""; position: absolute; left: 0; right: 0; top: -6px; height: 3px; background: var(--accent); border-radius: 1px; }
 .post .image { width: 100%; height: 180px; background: #0f0f0f; display: block; object-fit: cover; }
 .post .body { padding: 12px; }
 .post .meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
@@ -46,4 +48,8 @@ textarea { min-height: 72px; resize: vertical; }
 .hint { font-size: 11px; color: var(--muted); margin-top: 4px; }
 
 .left, .right { display: flex; gap: 8px; align-items: center; }
+
+.category-footer { display: flex; justify-content: flex-end; padding: 6px 0 0 0; }
+.select.tiny { padding: 4px 8px; height: 26px; font-size: 12px; width: auto; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
 

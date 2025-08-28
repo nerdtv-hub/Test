@@ -11,6 +11,7 @@ const galleryBtn = document.getElementById('galleryBtn');
 
 let allPosts = [];
 let currentAuthor = '';
+let canCreate = false;
 
 function nuiSend(name, data) {
 	if (typeof GetParentResourceName === 'function') {
@@ -22,8 +23,11 @@ function nuiSend(name, data) {
 	}
 }
 
-function renderCategories() {
-	const categories = Array.from(new Set(allPosts.map(p => p.category).filter(Boolean))).sort();
+function renderCategories(defaults) {
+	const categories = Array.from(new Set([
+		...(Array.isArray(defaults) ? defaults : []),
+		...allPosts.map(p => p.category).filter(Boolean)
+	])).filter(Boolean).sort();
 	categoryFilter.innerHTML = '<option value="">Alle Kategorien</option>' + categories.map(c => `<option value="${c}">${c}</option>`).join('');
 	categoriesList.innerHTML = categories.map(c => `<option value="${c}">`).join('');
 }
@@ -53,8 +57,7 @@ function renderPosts() {
 function openUI(author) {
 	currentAuthor = author || '';
 	root.classList.remove('hidden');
-	// request initial posts
-	nuiSend('requestPosts', {});
+	// initial data will be pushed to NUI after client asks server
 }
 
 function closeUI() {
@@ -105,8 +108,16 @@ window.addEventListener('message', (event) => {
 	}
 	if (data.type === 'posts') {
 		allPosts = Array.isArray(data.posts) ? data.posts : [];
-		renderCategories();
+		renderCategories(data.defaultCategories);
 		renderPosts();
+	}
+	if (data.type === 'permissions') {
+		canCreate = !!data.canCreate;
+		if (canCreate) {
+			newPostBtn.classList.remove('hidden');
+		} else {
+			newPostBtn.classList.add('hidden');
+		}
 	}
 	if (data.type === 'selectedImage') {
 		const imageInput = postForm.querySelector('#image');
@@ -118,7 +129,7 @@ window.addEventListener('message', (event) => {
 if (!window.invokeNative) {
 	root.classList.remove('hidden');
 	allPosts = [];
-	renderCategories();
+	renderCategories(['Events','Werbung','News','Jobanzeigen']);
 	renderPosts();
 }
 
