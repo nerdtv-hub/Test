@@ -1,0 +1,49 @@
+:root {
+	--bg: #121212;
+	--bg-elev: #1a1a1a;
+	--text: #efefef;
+	--muted: #bdbdbd;
+	--border: #2a2a2a;
+	--accent: #ff7a00;
+	--accent-700: #e96a00;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif; }
+
+.hidden { display: none; }
+
+.header { position: sticky; top: 0; background: linear-gradient(180deg, #1c1c1c, #111); border-bottom: 1px solid var(--border); }
+.logo { width: 100%; height: 72px; object-fit: cover; display: block; }
+
+.content { padding: 12px; }
+
+.toolbar { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 12px; }
+.select, input, textarea { width: 100%; background: var(--bg-elev); color: var(--text); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+textarea { min-height: 72px; resize: vertical; }
+
+.btn { background: transparent; color: var(--text); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; cursor: pointer; }
+.btn:hover { border-color: #3a3a3a; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: #111; }
+.btn.primary:hover { background: var(--accent-700); border-color: var(--accent-700); }
+.btn.subtle { border-color: #333; color: var(--muted); }
+
+.card { background: var(--bg-elev); border: 1px solid var(--border); border-radius: 12px; padding: 12px; margin-bottom: 12px; }
+.field { margin-bottom: 10px; }
+.field label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+.actions { display: flex; gap: 8px; justify-content: flex-end; }
+
+.list { display: flex; flex-direction: column; gap: 10px; }
+.post { background: var(--bg-elev); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.post .image { width: 100%; height: 180px; background: #0f0f0f; display: block; object-fit: cover; }
+.post .body { padding: 12px; }
+.post .meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+.badge { background: rgba(255,122,0,0.15); color: var(--accent); padding: 4px 8px; border-radius: 999px; font-weight: 600; }
+
+.title { margin: 0 0 6px 0; font-size: 18px; }
+.intro { margin: 0; color: #d5d5d5; }
+
+.hint { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+.left, .right { display: flex; gap: 8px; align-items: center; }
+
