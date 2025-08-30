@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>LB News</title>
+	<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+	<div id="root" class="hidden">
+		<header class="header">
+			<img src="logo.svg" alt="LB News" class="logo" />
+		</header>
+		<main class="content">
+			<section class="toolbar">
+				<div class="right">
+					<button id="newPostBtn" class="btn primary">Neuer Beitrag</button>
+					<button id="closeBtn" class="btn">Schließen</button>
+				</div>
+			</section>
+
+			<section id="newPost" class="card hidden">
+				<h2>Beitrag erstellen</h2>
+				<form id="postForm">
+					<div class="field">
+						<label>Titel</label>
+						<input type="text" id="title" required maxlength="120" />
+					</div>
+					<div class="field">
+						<label>Einleitung</label>
+						<textarea id="intro" required maxlength="280"></textarea>
+					</div>
+					<div class="field">
+						<label>Kategorie</label>
+						<input type="text" id="category" list="categoriesList" placeholder="z. B. Polizei, Wirtschaft" required />
+						<datalist id="categoriesList"></datalist>
+					</div>
+					<div class="field">
+						<label>Autor</label>
+						<input type="text" id="author" required />
+					</div>
+					<div class="field">
+						<label>Bild-URL oder Base64</label>
+						<input type="text" id="image" placeholder="https://.. oder data:image/png;base64,..." />
+						<div class="hint">Aus dem Phone: Galerie auswählen</div>
+						<button type="button" id="galleryBtn" class="btn subtle">Aus Galerie wählen</button>
+					</div>
+					<div class="actions">
+						<button type="submit" class="btn primary">Veröffentlichen</button>
+						<button type="button" id="cancelPost" class="btn">Abbrechen</button>
+					</div>
+				</form>
+			</section>
+
+			<section id="posts" class="list"></section>
+
+			<footer class="category-footer">
+				<label for="categoryFilter" class="sr-only">Kategorie filtern</label>
+				<select id="categoryFilter" class="select tiny">
+					<option value="">Alle Kategorien</option>
+				</select>
+			</footer>
+		</main>
+	</div>
+	<script src="app.js"></script>
+</body>
+</html>
+
