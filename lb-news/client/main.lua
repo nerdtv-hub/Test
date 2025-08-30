@@ -50,6 +50,13 @@ RegisterNUICallback('createPost', function(data, cb)
 	cb({ ok = true })
 end)
 
+RegisterNUICallback('deletePost', function(data, cb)
+	if type(data) == 'table' and data.id then
+		TriggerServerEvent('lb_news:deletePost', data.id)
+	end
+	cb({ ok = true })
+end)
+
 RegisterNUICallback('close', function(_, cb)
 	closeUI()
 	cb({ ok = true })

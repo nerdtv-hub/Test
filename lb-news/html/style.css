@@ -13,8 +13,8 @@ html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); f
 
 .hidden { display: none; }
 
-.header { position: sticky; top: 0; background: linear-gradient(180deg, #1c1c1c, #111); border-bottom: 1px solid var(--border); }
-.logo { width: 100%; height: 72px; object-fit: cover; display: block; }
+.header { position: sticky; top: 0; background: linear-gradient(180deg, #1c1c1c, #111); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: center; height: 72px; }
+.logo { height: 48px; width: auto; max-width: 90%; display: block; object-fit: contain; }
 
 .content { padding: 12px; }
 
@@ -27,6 +27,9 @@ textarea { min-height: 72px; resize: vertical; }
 .btn.primary { background: var(--accent); border-color: var(--accent); color: #111; }
 .btn.primary:hover { background: var(--accent-700); border-color: var(--accent-700); }
 .btn.subtle { border-color: #333; color: var(--muted); }
+.btn.tiny { padding: 4px 8px; font-size: 12px; border-radius: 6px; }
+.btn.danger { color: #ffb199; border-color: #5a2a2a; }
+.btn.danger:hover { color: #fff; background: #b33939; border-color: #b33939; }
 
 .card { background: var(--bg-elev); border: 1px solid var(--border); border-radius: 12px; padding: 12px; margin-bottom: 12px; }
 .field { margin-bottom: 10px; }

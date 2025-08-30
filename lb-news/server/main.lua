@@ -66,6 +66,33 @@ local function loadPosts()
 	end
 end
 
+local function seedSamplePosts()
+    if posts and #posts > 0 then return end
+    local categories = Config.DefaultCategories or { 'Events', 'Werbung', 'News', 'Jobanzeigen' }
+    local now = os.time()
+    local function makePost(cat, idx)
+        local ts = now - ((idx - 1) * 60)
+        return {
+            id = ('seed_%s_%d'):format(cat, idx),
+            title = ('%s Beispiel %d'):format(cat, idx),
+            intro = ('Kurze Einleitung für %s Beispiel %d.'):format(cat, idx),
+            content = '',
+            category = cat,
+            author = 'System',
+            image = '',
+            timestamp = ts,
+            time = os.date('%Y-%m-%d %H:%M', ts)
+        }
+    end
+    local seeded = {}
+    for _, cat in ipairs(categories) do
+        table.insert(seeded, makePost(cat, 1))
+        table.insert(seeded, makePost(cat, 2))
+    end
+    posts = seeded
+    savePosts()
+end
+
 local function savePosts()
 	-- sort newest first by timestamp
 	table.sort(posts, function(a, b)
@@ -78,6 +105,7 @@ AddEventHandler('onResourceStart', function(res)
 	if res ~= resourceName then return end
 	ensureDataFile()
 	loadPosts()
+	seedSamplePosts()
 end)
 
 RegisterNetEvent('lb_news:requestPosts', function()
@@ -133,5 +161,18 @@ RegisterNetEvent('lb_news:createPost', function(data)
 	table.insert(posts, 1, post)
 	savePosts()
 	TriggerClientEvent('lb_news:postsUpdated', -1, { posts = posts, defaultCategories = (Config.DefaultCategories or {}) })
+end)
+
+RegisterNetEvent('lb_news:deletePost', function(id)
+    local src = source
+    if not playerIsReporter(src) then return end
+    if type(id) ~= 'string' then return end
+    local newList = {}
+    for _, p in ipairs(posts) do
+        if p.id ~= id then table.insert(newList, p) end
+    end
+    posts = newList
+    savePosts()
+    TriggerClientEvent('lb_news:postsUpdated', -1, { posts = posts, defaultCategories = (Config.DefaultCategories or {}) })
 end)
 

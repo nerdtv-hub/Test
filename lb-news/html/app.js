@@ -46,12 +46,23 @@ function renderPosts() {
 					<span>${post.author || 'Unbekannt'}</span>
 					<span>•</span>
 					<span>${post.time || ''}</span>
+					${canCreate ? `<span style="margin-left:auto"></span><button class="btn subtle tiny danger" data-delete="${post.id}">Löschen</button>` : ''}
 				</div>
 				<h3 class="title">${post.title}</h3>
 				<p class="intro">${post.intro}</p>
 			</div>
 		</article>
 	`).join('');
+
+	if (canCreate) {
+		postsContainer.querySelectorAll('button[data-delete]').forEach(btn => {
+			btn.addEventListener('click', () => {
+				const id = btn.getAttribute('data-delete');
+				if (!id) return;
+				nuiSend('deletePost', { id });
+			});
+		});
+	}
 }
 
 function openUI(author) {
@@ -97,6 +108,9 @@ postForm.addEventListener('submit', (e) => {
 	postForm.reset();
 });
 
+// delete callback
+window.addEventListener('message', () => {});
+
 // NUI messages from client
 window.addEventListener('message', (event) => {
 	const data = event.data || {};
@@ -128,7 +142,14 @@ window.addEventListener('message', (event) => {
 // development helper to show UI in browser without FiveM
 if (!window.invokeNative) {
 	root.classList.remove('hidden');
-	allPosts = [];
+	// non-reporter preview with seeded posts
+	canCreate = false;
+	const now = Date.now();
+	function make(cat, i) {
+		const ts = Math.floor((now/1000) - (i * 60));
+		return { id: `web_${cat}_${i}`, title: `${cat} Beispiel ${i+1}`, intro: `Einleitung für ${cat} Beispiel ${i+1}.`, category: cat, author: 'System', time: new Date(ts*1000).toISOString().slice(0,16).replace('T',' '), timestamp: ts };
+	}
+	allPosts = ['Events','Werbung','News','Jobanzeigen'].flatMap(cat => [make(cat,0), make(cat,1)]);
 	renderCategories(['Events','Werbung','News','Jobanzeigen']);
 	renderPosts();
 }
