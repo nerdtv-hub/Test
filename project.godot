@@ -1,0 +1,32 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format: https://docs.godotengine.org/en/stable/classes/class_projectsettings.html
+
+config_version=5
+
+[application]
+config/name="MultiplayerQuiz"
+run/main_scene="res://scenes/MainMenu.tscn"
+config/features=PackedStringArray("4.4", "ForwardPlus")
+
+[autoload]
+NetworkManager="*res://autoload/NetworkManager.gd"
+GameState="*res://autoload/GameState.gd"
+QuizRegistry="*res://autoload/QuizRegistry.gd"
+
+[display]
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
+
+[input]
+action_continue={"deadzone":0.5, "events":[{"type":"key", "scancode":32, "physical_scancode":32, "unicode":32, "echo":false, "press":true}]}
+action_confirm={"deadzone":0.5, "events":[{"type":"key", "scancode":4194325, "physical_scancode":4194325, "unicode":0, "echo":false, "press":true}]}
+action_cancel={"deadzone":0.5, "events":[{"type":"key", "scancode":16777217, "physical_scancode":16777217, "unicode":0, "echo":false, "press":true}]}
+
+[rendering]
+renderer/rendering_method="forward_plus"
+

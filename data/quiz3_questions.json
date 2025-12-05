@@ -1,0 +1,10 @@
+[
+  {
+    "id": "c_tiere_100_01",
+    "category": "Tiere",
+    "value": 100,
+    "text": "Wie viele Beine hat eine Spinne?",
+    "answers": ["4", "6", "8", "10"],
+    "correct_index": 2
+  }
+]
