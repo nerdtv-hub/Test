@@ -1,0 +1,34 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://components/PlayerSlot.gd" id="1"]
+
+[node name="PlayerSlot" type="VBoxContainer"]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1")
+custom_minimum_size = Vector2(200, 300)
+
+[node name="NameLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Name"
+align = 1
+
+[node name="CameraRect" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0.2, 0.2, 0.2, 1.0)
+custom_minimum_size = Vector2(200, 150)
+
+[node name="ScoreLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Punkte: 0"
+align = 1
+
+[node name="JokerLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Joker"
+align = 1
+
+[node name="InputField" type="LineEdit" parent="."]
+layout_mode = 2
+placeholder_text = "Antwort"
+

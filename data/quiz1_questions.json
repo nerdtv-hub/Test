@@ -1,0 +1,10 @@
+[
+  {
+    "id": "q1_001",
+    "text": "Wie hoch ist der Eiffelturm?",
+    "answers": ["200m", "250m", "300m", "350m"],
+    "correct_index": 2,
+    "difficulty": 1,
+    "category": "Allgemein"
+  }
+]
